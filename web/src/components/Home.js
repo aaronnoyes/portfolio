@@ -19,32 +19,19 @@ const Header = styled.h1`
 `
 
 export default function Home(props) {
-
-    const [isLoggedIn, setLoggedIn] = useState(false)
-
-    Auth.currentUserInfo().then((user) => setLoggedIn(user !== null))
-    Auth.currentSession().then((r) => console.log(r))
-
     return (
         <PageContainer>
             <Menu>
-		{ 
-		  isLoggedIn && <Link to="/posts/new">
-                    <ActionButton solid={true}>New Post</ActionButton>
-		  </Link>
-		}
-		{ 
-		  !isLoggedIn && <Link to="/posts/new">
-                    <ActionButton solid={true}>Log In</ActionButton>
-		  </Link>
-		}
+		        <Link to="/admin">
+                    <ActionButton solid={true}>Admin</ActionButton>
+		        </Link>
             </Menu>
             <ContentContainer>
                 <Section>
                     <Header>Aaron Noyes</Header>
                     <ProfilePhoto src={me} className='profile-icon'></ProfilePhoto>
                     <MarkdownWrapper>{md}</MarkdownWrapper>
-		    <PostList loggedIn={isLoggedIn}/>
+		            <PostList loggedIn={false}/>
                 </Section>
             </ContentContainer>
         </PageContainer>

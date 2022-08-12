@@ -29,17 +29,23 @@ export default function Edit(props) {
   const [post, setPost] = useState({});
   const [idToken, setIdToken] = useState(null)
 
-  Auth.currentSession().then((s) => setIdToken(s.idToken.jwtToken))
+  
 
-  if (!props.isNew) {
-    useEffect(() => {
+  useEffect(() => {
+    Auth.currentSession().then((s) => setIdToken(s.idToken.jwtToken))
+  }, [])
+
+  useEffect(() => {
+    if (!props.isNew) {
       getPost(urlParams.postId)
         .then(post => {
           setContents(post.contents);
           setPost(post);
         });   
-    }, [props.postId]);
+    }
+  }, [props.postId]);
 
+  if (!props.isNew) {
     action = () => {
       updatePost(post, contents, idToken)
         .then(() => navigate('/'))
@@ -58,10 +64,9 @@ export default function Edit(props) {
 
 
   return (
-  <Authenticator hideSignUp={true}>
-    <PageContainer single={true}>
-      <ActionMenu action={action} cancel={() => navigate('/')}>{actionName}</ActionMenu>
-      <ContentContainer>
+     <PageContainer single={true}>
+       <ActionMenu action={action} cancel={() => navigate('/')}>{actionName}</ActionMenu>
+       <ContentContainer>
         <AceEditor
           mode="markdown"
           theme="monokai"
@@ -71,10 +76,9 @@ export default function Edit(props) {
           width="60vw"
           value={contents}
         />
-        <MarkdownWrapper>{contents}</MarkdownWrapper>
-      </ContentContainer>
-    </PageContainer>
-  </Authenticator>
+         <MarkdownWrapper>{contents}</MarkdownWrapper>
+       </ContentContainer>
+     </PageContainer>
   )
 }
 
