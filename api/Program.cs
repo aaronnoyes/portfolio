@@ -46,7 +46,7 @@ var res = builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationSch
 
 builder.Services.AddControllers();
 
-var connectionString = $"server=db;port=3306;userid={builder.Configuration["MYSQL_USER"]};password={builder.Configuration["MYSQL_PASSWORD"]};database={builder.Configuration["MYSQL_DATABASE"]};";
+var connectionString = $"{builder.Configuration["ConnectionStringBase"]}userid={builder.Configuration["MYSQL_USER"]};password={builder.Configuration["MYSQL_PASSWORD"]};database={builder.Configuration["MYSQL_DATABASE"]};";
 Console.Write(connectionString);
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 0));
 builder.Services.AddDbContext<BlogContext>(opt => opt.UseMySql(connectionString, serverVersion, mySqlOptions => 
