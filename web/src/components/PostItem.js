@@ -24,7 +24,7 @@ const ListItem = styled.li`
 export default function PostItem({post, loggedIn}) {
     return (
         <ListItem key={post.id}>
-            <StyledLink to={'posts/' + post.id}>{post.name}</StyledLink>
+            <StyledLink to={'/posts/' + post.id}>{post.name}</StyledLink>
             <br></br>
             <small>
                 {( () => {
@@ -33,7 +33,7 @@ export default function PostItem({post, loggedIn}) {
                 })()}
             </small>
             <br></br>
-	    { loggedIn && <StyledLink small={true} to={'posts/' + post.id + '/edit'}>Edit</StyledLink>}
+	    { loggedIn && <StyledLink small={true} to={'/posts/' + post.id + '/edit'}>Edit</StyledLink>}
         </ListItem>
     );
 }

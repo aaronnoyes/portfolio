@@ -19,7 +19,7 @@ function App() {
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/" element={<Admin />} />
             <Route path="/posts/:postId" element={<ViewPost />} />
             <Route path="/posts/:postId/edit" element={<Edit />} />
             <Route path="/posts/new" element={<Edit isNew={true}/>} />
