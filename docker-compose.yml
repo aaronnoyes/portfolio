@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+    reverse:
+      container_name: reverse
+      depends_on:
+        - web
+        - api
+      build: ./proxy
+      ports:
+        - 80:80
+    web:
+      container_name: web
+      build: ./web
+      hostname: blog-web
+    api:
+      depends_on:
+        - db
+      environment:
+        MYSQL_DATABASE: "${DBNAME}"
+        MYSQL_USER: "${DBUSER}"
+        MYSQL_PASSWORD: "${DBPASS}"
+      container_name: api
+      build: ./api
+      hostname: blog-api
+    db:
+      image: mysql:8
+      hostname: db
+      environment:
+        MYSQL_RANDOM_ROOT_PASSWORD: 1
+        MYSQL_DATABASE: "${DBNAME}"
+        MYSQL_USER: "${DBUSER}"
+        MYSQL_PASSWORD: "${DBPASS}"
+      volumes:
+        - dbdata:/var/lib/mysql
+volumes:
+     dbdata: {}
