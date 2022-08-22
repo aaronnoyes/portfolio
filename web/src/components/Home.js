@@ -31,7 +31,7 @@ export default function Home(props) {
                     <Header>Aaron Noyes</Header>
                     <ProfilePhoto src={me} className='profile-icon'></ProfilePhoto>
                     <MarkdownWrapper>{md}</MarkdownWrapper>
-		            <PostList loggedIn={false}/>
+		            <PostList idToken={null}/>
                 </Section>
             </ContentContainer>
         </PageContainer>

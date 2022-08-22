@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState, useEffect } from "react";
 import PostList from "./PostList.js";
 import ActionButton from "./ActionButton.js"
 import MarkdownWrapper from "./MarkdownWrapper.js";
@@ -11,9 +11,6 @@ import { Authenticator } from '@aws-amplify/ui-react';
 import {Link} from 'react-router-dom'
 import {Auth} from 'aws-amplify'
 import styled from 'styled-components'
-import md from '../home.md';
-
-import me from '../images/me.jpeg'
 
 const Header = styled.h1`
     text-align: center;
@@ -21,10 +18,11 @@ const Header = styled.h1`
 
 export default function Admin(props) {
 
-    const [isLoggedIn, setLoggedIn] = useState(false)
+    const [idToken, setIdToken] = useState(null)
 
-    Auth.currentUserInfo().then((user) => setLoggedIn(user !== null))
-    Auth.currentSession().then((r) => console.log(r))
+    useEffect(() => {
+        Auth.currentSession().then((s) => setIdToken(s.idToken.jwtToken))
+    }, [])
 
     return (
         <Authenticator hideSignUp={true}>
@@ -37,7 +35,7 @@ export default function Admin(props) {
                 <ContentContainer>
                     <Section>
                         <Header>Admin</Header>
-                        <PostList loggedIn={isLoggedIn}/>
+                        <PostList loggedIn={true} idToken={idToken}/>
                     </Section>
                 </ContentContainer>
             </PageContainer>

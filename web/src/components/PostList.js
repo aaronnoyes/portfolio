@@ -8,7 +8,7 @@ const List = styled.ul`
    padding: 0px; 
 `
 
-export default function PostList({loggedIn}) {
+export default function PostList({idToken}) {
     const [posts, setPosts] = useState([]);
     
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function PostList({loggedIn}) {
             <List> 
                 {
                     posts.length !== 0
-                    ? posts.map(p => <PostItem key={p.id} post={p} loggedIn={loggedIn}/>)
+                    ? posts.map(p => <PostItem key={p.id} post={p} idToken={idToken}/>)
                     : <p>No posts yet...</p>
                 }
             </List>

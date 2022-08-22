@@ -56,3 +56,16 @@ export function updatePost(post, contents, token) {
     })
   );
 }
+
+export function deletePost(id, token) {
+  return (
+    fetch(API + 'blogposts/' + id, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+	'Authorization': 'Bearer ' + token
+      }
+    })
+  )
+}

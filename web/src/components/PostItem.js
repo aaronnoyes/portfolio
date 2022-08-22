@@ -1,6 +1,8 @@
 import  React from 'react';
 import { Link } from "react-router-dom";
+import {Auth} from 'aws-amplify'
 import styled, {css} from 'styled-components';
+import { deletePost } from '../lib/posts';
 
 
 const StyledLink = styled(Link)`
@@ -17,11 +19,18 @@ const StyledLink = styled(Link)`
     `}
 `
 
+const DeleteButton = styled.a`
+    color: red;
+    text-decoration: none;
+    font-size 0.8em;
+    padding-left: 8px;
+`
+
 const ListItem = styled.li`
     margin: 20px 0px;
 `
 
-export default function PostItem({post, loggedIn}) {
+export default function PostItem({post, idToken}) {
     return (
         <ListItem key={post.id}>
             <StyledLink to={'/posts/' + post.id}>{post.name}</StyledLink>
@@ -33,7 +42,8 @@ export default function PostItem({post, loggedIn}) {
                 })()}
             </small>
             <br></br>
-	    { loggedIn && <StyledLink small={true} to={'/posts/' + post.id + '/edit'}>Edit</StyledLink>}
+	    { idToken !== null && <StyledLink small={true} to={'/posts/' + post.id + '/edit'}>Edit</StyledLink>}
+        { idToken !== null && <DeleteButton href={"#"} onClick={() => deletePost(post.id, idToken)}>Delete</DeleteButton>}        
         </ListItem>
     );
 }
