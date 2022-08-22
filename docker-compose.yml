@@ -16,21 +16,18 @@ services:
       depends_on:
         - db
       environment:
-        MYSQL_DATABASE: "${DBNAME}"
-        MYSQL_USER: "${DBUSER}"
-        MYSQL_PASSWORD: "${DBPASS}"
+        DBUSER: "${DBUSER}"
+        DBPASS: "${DBPASS}"
       container_name: api
       build: ./api
       hostname: blog-api
     db:
-      image: mysql:8
+      image: mcr.microsoft.com/mssql/server:2022-latest
       hostname: db
       environment:
-        MYSQL_RANDOM_ROOT_PASSWORD: 1
-        MYSQL_DATABASE: "${DBNAME}"
-        MYSQL_USER: "${DBUSER}"
-        MYSQL_PASSWORD: "${DBPASS}"
+        ACCEPT_EULA: "Y"
+        SA_PASSWORD: "${DBPASS}"
       volumes:
-        - dbdata:/var/lib/mysql
+        - dbdata:/var/opt/mssql
 volumes:
      dbdata: {}

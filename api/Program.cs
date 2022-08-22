@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using BlogApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -9,8 +10,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Data;
 using System.Data.SqlClient;
-using MySql.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,17 +45,11 @@ var res = builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationSch
 
 builder.Services.AddControllers();
 
-var connectionString = $"{builder.Configuration["ConnectionStringBase"]}userid={builder.Configuration["MYSQL_USER"]};password={builder.Configuration["MYSQL_PASSWORD"]};database={builder.Configuration["MYSQL_DATABASE"]};";
-Console.Write(connectionString);
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 0));
-builder.Services.AddDbContext<BlogContext>(opt => opt.UseMySql(connectionString, serverVersion, mySqlOptions => 
-    {
-        mySqlOptions.EnableRetryOnFailure(
-            maxRetryCount: 255,
-            maxRetryDelay: TimeSpan.FromSeconds(30),
-            errorNumbersToAdd: null)
-        ;
-    }));
+SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder(builder.Configuration["ConnectionStringBase"]);
+connectionStringBuilder.UserID = builder.Configuration["DBUSER"];
+connectionStringBuilder.Password = builder.Configuration["DBPASS"];
+connectionStringBuilder.ConnectRetryCount = 30;
+builder.Services.AddDbContext<BlogContext>(opt => opt.UseSqlServer(connectionStringBuilder.ConnectionString));
 
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
     {
