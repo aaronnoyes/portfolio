@@ -12,8 +12,6 @@ import {Auth} from 'aws-amplify'
 import styled from 'styled-components'
 import md from '../home.md';
 
-import me from '../images/me.jpeg'
-
 const Header = styled.h1`
     text-align: center;
 `
@@ -29,7 +27,6 @@ export default function Home(props) {
             <ContentContainer>
                 <Section>
                     <Header>Aaron Noyes</Header>
-                    <ProfilePhoto src={me} className='profile-icon'></ProfilePhoto>
                     <MarkdownWrapper>{md}</MarkdownWrapper>
 		            <PostList idToken={null}/>
                 </Section>

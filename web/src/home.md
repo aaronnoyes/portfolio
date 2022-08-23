@@ -5,9 +5,9 @@ This site is the result of a learning project where I set out to learn about bui
 - React for the frontend
 - .NET API
 - AWS Cognito for admin authentication
-- mySQL database
+- Microsoft SQL Server database
 - nginx as a reverse proxy
-- Docker to arrange all of the services
+- Docker compose to arrange all of the services
 - AWS EC2 to host everything
 
 I plan on writing a post that details how everything was built. In the future, I want to use this site as a place to post about software and security that I find interesting.
