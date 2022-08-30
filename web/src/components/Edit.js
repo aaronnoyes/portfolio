@@ -21,9 +21,6 @@ export default function Edit(props) {
   let urlParams = useParams();
   let navigate = useNavigate();
 
-  let action;
-  let actionName;
-
   const [contents, setContents] = useState(placeHolder);
   const [post, setPost] = useState({});
   const [idToken, setIdToken] = useState(null);
@@ -42,28 +39,21 @@ export default function Edit(props) {
     }
   }, [props.postId]);
 
-  if (!props.isNew) {
-    action = () => {
+  const action = () => {
+    if (!props.isNew) {
       updatePost(post, contents, idToken)
         .then(() => navigate('/'));
     }
-
-    actionName = "Update";
-  }
-  else {
-    action = () => {
+    else {
       newPost(contents, idToken)
         .then(() => navigate('/'));
     }
-
-    actionName = "Create";
   }
-
 
   return (
     <PageContainer single={true}>
       <Menu>
-        <ActionButton solid={true} onClick={action}>{actionName}</ActionButton>
+        <ActionButton solid={true} onClick={action}>{props.isNew ? "Create" : "Update"}</ActionButton>
         <ActionButton onClick={() => {navigate('/admin')}}>Cancel</ActionButton>
       </Menu>
       <ContentContainer>
