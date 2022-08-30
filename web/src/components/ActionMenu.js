@@ -1,6 +1,6 @@
 import React from 'react';
 import ActionButton from './ActionButton.js';
-import Menu from "./Menu.js"
+import Menu from "./Menu.js";
 
 export default function ActionMenu(props) {
     return (

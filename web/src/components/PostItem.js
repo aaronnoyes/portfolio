@@ -1,6 +1,5 @@
 import  React from 'react';
 import { Link } from "react-router-dom";
-import {Auth} from 'aws-amplify'
 import styled, {css} from 'styled-components';
 import { deletePost } from '../lib/posts';
 

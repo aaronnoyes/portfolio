@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import PostItem from './PostItem.js';
 import styled from 'styled-components';
 import { getAllPosts } from '../lib/posts.js';

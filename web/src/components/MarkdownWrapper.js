@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactMarkdown from 'react-markdown';
-import Section from './Section.js'
-import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
-import oneDark from 'react-syntax-highlighter/dist/esm/styles/prism/one-dark.js'
+import Section from './Section.js';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import oneDark from 'react-syntax-highlighter/dist/esm/styles/prism/one-dark.js';
 
 
 export default function MarkdownWrapper(props) {

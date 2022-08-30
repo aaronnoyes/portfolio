@@ -2,14 +2,12 @@ import React, { useState} from "react";
 import PostList from "./PostList.js";
 import ActionButton from "./ActionButton.js"
 import MarkdownWrapper from "./MarkdownWrapper.js";
-import Menu from "./Menu.js"
-import ProfilePhoto from "./ProfilePhoto.js"
+import Menu from "./Menu.js";
 import PageContainer from "./PageContainer.js";
-import Section from './Section.js'
+import Section from './Section.js';
 import ContentContainer from "./ContentContainer.js";
-import {Link} from 'react-router-dom'
-import {Auth} from 'aws-amplify'
-import styled from 'styled-components'
+import {Link} from 'react-router-dom';
+import styled from 'styled-components';
 import md from '../home.md';
 
 const Header = styled.h1`

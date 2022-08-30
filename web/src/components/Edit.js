@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import MarkdownWrapper from './MarkdownWrapper.js';
 import AceEditor from 'react-ace';
-import ActionMenu from './ActionMenu.js'
+import ActionMenu from './ActionMenu.js';
 import ContentContainer from './ContentContainer.js';
 import PageContainer from './PageContainer.js';
-import {Auth} from 'aws-amplify'
+import {Auth} from 'aws-amplify';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getPost, updatePost, newPost} from '../lib/posts.js'
+import { getPost, updatePost, newPost} from '../lib/posts.js';
 
-import md from '../new-placeholder.md'
+import md from '../new-placeholder.md';
 
 import "ace-builds/src-noconflict/mode-markdown.js";
 import "ace-builds/src-noconflict/theme-monokai.js";
@@ -26,12 +26,12 @@ export default function Edit(props) {
 
   const [contents, setContents] = useState(placeHolder);
   const [post, setPost] = useState({});
-  const [idToken, setIdToken] = useState(null)
+  const [idToken, setIdToken] = useState(null);
 
   
 
   useEffect(() => {
-    Auth.currentSession().then((s) => setIdToken(s.idToken.jwtToken))
+    Auth.currentSession().then((s) => setIdToken(s.idToken.jwtToken));
   }, [])
 
   useEffect(() => {
@@ -47,18 +47,18 @@ export default function Edit(props) {
   if (!props.isNew) {
     action = () => {
       updatePost(post, contents, idToken)
-        .then(() => navigate('/'))
+        .then(() => navigate('/'));
     }
 
-    actionName = "Update"
+    actionName = "Update";
   }
   else {
     action = () => {
       newPost(contents, idToken)
-        .then(() => navigate('/'))
+        .then(() => navigate('/'));
     }
 
-    actionName = "Create"
+    actionName = "Create";
   }
 
 
