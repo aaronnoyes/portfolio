@@ -6,7 +6,6 @@ import ContentContainer from './ContentContainer.js';
 import PageContainer from './PageContainer.js';
 import {Auth} from 'aws-amplify'
 import { useParams, useNavigate } from 'react-router-dom';
-import { Authenticator } from '@aws-amplify/ui-react';
 import { getPost, updatePost, newPost} from '../lib/posts.js'
 
 import md from '../new-placeholder.md'
