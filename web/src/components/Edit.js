@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MarkdownWrapper from './MarkdownWrapper.js';
 import AceEditor from 'react-ace';
-import ActionMenu from './ActionMenu.js';
+import Menu, {ActionButton} from './Menu.js';
 import ContentContainer from './ContentContainer.js';
 import PageContainer from './PageContainer.js';
 import {Auth} from 'aws-amplify';
@@ -27,8 +27,6 @@ export default function Edit(props) {
   const [contents, setContents] = useState(placeHolder);
   const [post, setPost] = useState({});
   const [idToken, setIdToken] = useState(null);
-
-  
 
   useEffect(() => {
     Auth.currentSession().then((s) => setIdToken(s.idToken.jwtToken));
@@ -63,9 +61,12 @@ export default function Edit(props) {
 
 
   return (
-     <PageContainer single={true}>
-       <ActionMenu action={action} cancel={() => navigate('/')}>{actionName}</ActionMenu>
-       <ContentContainer>
+    <PageContainer single={true}>
+      <Menu>
+        <ActionButton solid={true} onClick={action}>{actionName}</ActionButton>
+        <ActionButton onClick={() => {navigate('/admin')}}>Cancel</ActionButton>
+      </Menu>
+      <ContentContainer>
         <AceEditor
           mode="markdown"
           theme="monokai"
@@ -75,9 +76,9 @@ export default function Edit(props) {
           width="60vw"
           value={contents}
         />
-         <MarkdownWrapper>{contents}</MarkdownWrapper>
-       </ContentContainer>
-     </PageContainer>
+        <MarkdownWrapper>{contents}</MarkdownWrapper>
+      </ContentContainer>
+    </PageContainer>
   )
 }
 

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PostList from "./PostList.js";
-import ActionButton from "./ActionButton.js";
-import Menu from "./Menu.js";
+import Menu, {ActionButton} from "./Menu.js";
 import PageContainer from "./PageContainer.js";
 import Section from './Section.js';
 import ContentContainer from "./ContentContainer.js";
 import { Authenticator } from '@aws-amplify/ui-react';
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {Auth} from 'aws-amplify';
 import styled from 'styled-components';
 
@@ -18,6 +17,8 @@ export default function Admin(props) {
 
     const [idToken, setIdToken] = useState(null);
 
+    let navigate = useNavigate();
+
     useEffect(() => {
         Auth.currentSession().then((s) => setIdToken(s.idToken.jwtToken));
     }, [])
@@ -26,9 +27,8 @@ export default function Admin(props) {
         <Authenticator hideSignUp={true}>
             <PageContainer>
                 <Menu>
-                    <Link to="/posts/new">
-                        <ActionButton solid={true}>New Post</ActionButton>
-                    </Link>
+                    <ActionButton solid={true} onClick={() => {navigate('/posts/new')}}>New Post</ActionButton>
+                    <ActionButton onClick={() => {navigate('/')}}>Home</ActionButton>
                 </Menu>
                 <ContentContainer>
                     <Section>

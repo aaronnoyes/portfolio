@@ -1,8 +1,7 @@
-import React, { useState} from "react";
+import React from "react";
 import PostList from "./PostList.js";
-import ActionButton from "./ActionButton.js"
 import MarkdownWrapper from "./MarkdownWrapper.js";
-import Menu from "./Menu.js";
+import Menu, {ActionButton} from "./Menu.js";
 import PageContainer from "./PageContainer.js";
 import Section from './Section.js';
 import ContentContainer from "./ContentContainer.js";
