@@ -6,7 +6,7 @@ import ContentContainer from './ContentContainer.js';
 import PageContainer from './PageContainer.js';
 import {Auth} from 'aws-amplify';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getPost, updatePost, newPost} from '../lib/posts.js';
+import { getPost, updatePost, newPost, deletePost} from '../lib/posts.js';
 
 import md from '../new-placeholder.md';
 
@@ -42,18 +42,24 @@ export default function Edit(props) {
   const action = () => {
     if (!props.isNew) {
       updatePost(post, contents, idToken)
-        .then(() => navigate('/'));
+        .then(() => navigate('/admin'));
     }
     else {
       newPost(contents, idToken)
-        .then(() => navigate('/'));
+        .then(() => navigate('/admin'));
     }
+  }
+
+  const deleteWrapper = () => {
+    deletePost(post.id, idToken)
+      .then(() => navigate('/admin'));
   }
 
   return (
     <PageContainer single={true}>
       <Menu>
         <ActionButton solid={true} onClick={action}>{props.isNew ? "Create" : "Update"}</ActionButton>
+        {!props.isNew && <ActionButton solid={true} color={"red"} onClick={deleteWrapper}>Delete</ActionButton>}
         <ActionButton onClick={() => {navigate('/admin')}}>Cancel</ActionButton>
       </Menu>
       <ContentContainer>

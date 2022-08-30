@@ -22,4 +22,7 @@ export const ActionButton = styled.button`
         color: white;
         background: black; 
     `}
+    ${ props => props.color && css`
+        background-color: ${props.color};
+    `}
 `

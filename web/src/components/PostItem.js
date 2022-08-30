@@ -41,8 +41,7 @@ export default function PostItem({post, idToken}) {
                 })()}
             </small>
             <br></br>
-	    { idToken !== null && <StyledLink small={true} to={'/posts/' + post.id + '/edit'}>Edit</StyledLink>}
-        { idToken !== null && <DeleteButton href={"#"} onClick={() => deletePost(post.id, idToken)}>Delete</DeleteButton>}        
+	    { idToken !== null && <StyledLink small={true} to={'/posts/' + post.id + '/edit'}>Edit</StyledLink>}      
         </ListItem>
     );
 }
