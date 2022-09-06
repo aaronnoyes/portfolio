@@ -1,12 +1,12 @@
 const express = require('express');
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
 
 app.use(express.static('dist'))
 
 app.use((req, res, next) => {
-  console.log(req.url)
-  next()
+  console.log(req.url);
+  next();
 })
 
 app.use((req, res) => {
@@ -14,5 +14,5 @@ app.use((req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
+  console.log(`Listening on port ${port}`);
 })
