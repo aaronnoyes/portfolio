@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development",
+    "dev": "APIPORT=5000 webpack-dev-server --mode development",
     "prod": "node server.js",
     "build": "webpack"
   },

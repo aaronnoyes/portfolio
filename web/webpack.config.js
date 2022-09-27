@@ -45,6 +45,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, "public/index.html"),
       favicon: path.join(__dirname, 'public/favicon.ico')
+    }),
+    new webpack.DefinePlugin({
+      'process.env.APIPORT': JSON.stringify(process.env.APIPORT)
     })
   ]
 };

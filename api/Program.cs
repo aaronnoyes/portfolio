@@ -45,11 +45,16 @@ var res = builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationSch
 
 builder.Services.AddControllers();
 
-SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder(builder.Configuration["ConnectionStringBase"]);
-connectionStringBuilder.UserID = builder.Configuration["DBUSER"];
-connectionStringBuilder.Password = builder.Configuration["DBPASS"];
-connectionStringBuilder.ConnectRetryCount = 30;
-builder.Services.AddDbContext<BlogContext>(opt => opt.UseSqlServer(connectionStringBuilder.ConnectionString));
+if (builder.Environment.IsDevelopment()) {
+    builder.Services.AddDbContext<BlogContext>(opt => opt.UseInMemoryDatabase("Blog"));
+}
+else {
+    SqlConnectionStringBuilder connectionStringBuilder = new SqlConnectionStringBuilder(builder.Configuration["ConnectionStringBase"]);
+    connectionStringBuilder.UserID = builder.Configuration["DBUSER"];
+    connectionStringBuilder.Password = builder.Configuration["DBPASS"];
+    connectionStringBuilder.ConnectRetryCount = 30;
+    builder.Services.AddDbContext<BlogContext>(opt => opt.UseSqlServer(connectionStringBuilder.ConnectionString));
+}
 
 builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
     {

@@ -1,5 +1,5 @@
 const URL = 'http://localhost';
-const PORT = '80';
+const PORT = process.env.APIPORT || '80';
 const API = URL + ':' + PORT + '/api/';
 
 function getPostName(c) {
